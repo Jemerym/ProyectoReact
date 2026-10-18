@@ -1,4 +1,5 @@
 import Boton from "../atomos/Boton";
+import BotonCarrito from "../atomos/BotonCarrito";
 
 interface CardProductosProps {
     id : number;
@@ -17,8 +18,10 @@ function CardProductos({ id , codigo , nombre, categoria, stock , precio, descri
         <div className="card-container">
             
             <div className="card h-100" style={{ width: '20rem' }}>
-                <span className="badge-categoria">{categoria}  </span>
-                <span className="badge-stock">Stock: {stock}</span>
+                <div className="d-flex gap-5">
+                <span className="text-secondary small">{categoria}  </span>
+                <span className="text-secondary small ms-auto">Stock: {stock}</span>
+                </div>
                 <img
 
                     src = {imagen}
@@ -38,8 +41,9 @@ function CardProductos({ id , codigo , nombre, categoria, stock , precio, descri
                     <h4 className = "card-text">
                         ${precio}
                     </h4>
-                    <div className="mt-auto d-flex">
+                    <div className="d-flex gap-4">
                         <Boton id={id}/>
+                        <BotonCarrito/>
                     </div>
                 </div>
             </div>
