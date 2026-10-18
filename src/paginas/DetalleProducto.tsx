@@ -1,5 +1,7 @@
 import { useParams} from "react-router-dom"
 import BotonVolver from "../componentes/atomos/BotonVolver"
+import { useState } from "react"
+import BotonCarrito from "../componentes/atomos/BotonCarrito"
 
 const productos = [
     {
@@ -149,6 +151,20 @@ const productos = [
 ]
 
 function DetalleProducto() {
+
+    const [stockActual, setStockActual] = useState(productos[0].stock)
+
+    const agregar = () => {
+        if(stockActual > 0) {
+            if (window.confirm("Estas seguro de añadir este producto?")) {
+                setStockActual(stockActual - 1);
+                alert("Producto añadido")
+            }
+        }else{
+            alert("Producto sin stock")
+        }
+    };
+
     const { id } = useParams()
 
     const producto = productos.find(
@@ -170,7 +186,9 @@ function DetalleProducto() {
             <p>Stock: {producto?.stock}</p>
             <p>Precio: ${producto?.precio}</p>
             <p>Descripcion: {producto?.descripcion}</p>
-
+            <div>
+                <BotonCarrito onClick={agregar} />
+            </div>
             <BotonVolver />
         </div>
     )
