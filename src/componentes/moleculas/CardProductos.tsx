@@ -41,7 +41,7 @@ function CardProductos({ id , codigo , nombre, categoria, stock , precio, descri
                     <h4 className = "card-text">
                         ${precio}
                     </h4>
-                    <div className="d-flex gap-4">
+                    <div className="d-flex gap-4 mt-auto">
                         <Boton id={id}/>
                     </div>
                 </div>
