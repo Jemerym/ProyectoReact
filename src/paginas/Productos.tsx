@@ -2,10 +2,10 @@ import CardProductos from "../componentes/moleculas/CardProductos";
 
 function Productos() {
     return (
-        <div className="container mt-5">
-        <h1>Productos</h1>
+        <div className="container mt-5 ">
+        <h1 className="text-center">Productos</h1>
         <br /> <br />
-        <h2>Cilindro de Gas</h2>
+        <h2 className="text-center">Cilindro de Gas</h2>
             <div className="d-flex gap-3">
                 <CardProductos
                     id={1}
@@ -50,7 +50,7 @@ function Productos() {
             </div>
 
             <br /> <br />
-            <h2>Reguladores</h2>
+            <h2 className="text-center">Reguladores</h2>
             <div className="d-flex gap-3">
                 <CardProductos
                     id={5}
@@ -85,7 +85,7 @@ function Productos() {
 
             </div>
              <br /> <br />
-            <h2>Mangueras y Conexiones</h2>
+            <h2 className="text-center">Mangueras y Conexiones</h2>
             <div className="d-flex gap-3">
                 <CardProductos
                     id={8}
@@ -129,7 +129,7 @@ function Productos() {
 
             </div>
             <br /> <br />
-            <h2>Accesorios</h2>
+            <h2 className="text-center">Accesorios</h2>
             <div className="d-flex gap-3">
                 <CardProductos
                     id={12}

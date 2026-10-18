@@ -8,11 +8,10 @@ function Boton({ id }: BotonProps) {
 
     return (
         <Link
-        to={`/producto/${id}`}
-            className='btn btn-primary' 
+            to={`/producto/${id}`}
+            className='btn btn-primary w-100' 
         >
             Ver producto
-        
         </Link>
     )
 }

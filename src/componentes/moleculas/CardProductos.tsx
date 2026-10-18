@@ -17,9 +17,13 @@ function CardProductos({ id , codigo , nombre, categoria, stock , precio, descri
         <div className="card-container">
             
             <div className="card h-100" style={{ width: '20rem' }}>
-                <div className="d-flex gap-5">
-                <span className="text-secondary small">{categoria}  </span>
-                <span className="text-secondary small ms-auto">Stock: {stock}</span>
+                <div className="bg-black p-2 d-flex ">
+                <span className="bg-white text-dark fw-bold px-3 py-1 rounded-pill small">
+                    {categoria}
+                </span>
+                <span className="bg-warning text-dark fw-bold px-3 py-1 rounded-pill small ms-auto">
+                    Stock: {stock}
+                </span>
                 </div>
                 <img
 
@@ -30,15 +34,15 @@ function CardProductos({ id , codigo , nombre, categoria, stock , precio, descri
                 />
 
                 <div className="card-body d-flex flex-column">
-                    <h5 className = "card-title">
+                    <h5 className = "card-title fw-bold">
                         {nombre}
                     </h5>
                     <p className = "card-text">
                         {descripcion}
                     </p>
 
-                    <h4 className = "card-text">
-                        ${precio}
+                    <h4 className = "card-text fw-bold">
+                    ${Number(precio).toLocaleString('es-CL')}
                     </h4>
                     <div className="d-flex gap-4 mt-auto">
                         <Boton id={id}/>
