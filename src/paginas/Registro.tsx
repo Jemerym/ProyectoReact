@@ -12,8 +12,9 @@ function Registro() {
                         <FormularioRegistro />
 
                         <div className="text-center mt-3">
-                        <Link to="/Login" className='btn btn-warning w-100 fw-bold mt-3'>
-                            Volver al Login
+                        <p className="mb-1 text-muted">¿Ya tiene una cuenta?</p>
+                        <Link to="/Login" className="btn btn-outline-secondary w-100 fw-bold">
+                            Iniciar Sesion
                         </Link>
                         </div>
                     </div>
