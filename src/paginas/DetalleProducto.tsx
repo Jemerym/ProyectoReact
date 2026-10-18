@@ -152,11 +152,24 @@ const productos = [
 
 function DetalleProducto() {
 
-    const [stockActual, setStockActual] = useState(productos[0].stock)
+    
+
+    
+
+    const { id } = useParams()
+
+    const producto = productos.find(
+        producto => producto.id === Number(id)
+    )
+
+    const [stockActual, setStockActual] = useState(producto ? producto.stock : 0)
 
     const agregar = () => {
         if(stockActual > 0) {
             if (window.confirm("Estas seguro de añadir este producto?")) {
+                if (producto) {
+                    producto.stock = producto.stock - 1;
+                }
                 setStockActual(stockActual - 1);
                 alert("Producto añadido")
             }
@@ -164,12 +177,6 @@ function DetalleProducto() {
             alert("Producto sin stock")
         }
     };
-
-    const { id } = useParams()
-
-    const producto = productos.find(
-        producto => producto.id === Number(id)
-    )
 
     return(
         <div className="container mt-5">
@@ -183,7 +190,7 @@ function DetalleProducto() {
             <h2>{producto?.nombre}</h2>
             <p>Codigo: {producto?.codigo}</p>
             <p>Categoria: {producto?.categoria}</p>
-            <p>Stock: {producto?.stock}</p>
+            <p>Stock: {stockActual}</p>
             <p>Precio: ${producto?.precio}</p>
             <p>Descripcion: {producto?.descripcion}</p>
             <div>

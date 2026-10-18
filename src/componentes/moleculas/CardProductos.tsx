@@ -1,5 +1,4 @@
 import Boton from "../atomos/Boton";
-import BotonCarrito from "../atomos/BotonCarrito";
 
 interface CardProductosProps {
     id : number;
