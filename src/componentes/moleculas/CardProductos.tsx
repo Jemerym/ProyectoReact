@@ -43,7 +43,7 @@ function CardProductos({ id , codigo , nombre, categoria, stock , precio, descri
                     </h4>
                     <div className="d-flex gap-4">
                         <Boton id={id}/>
-                        <BotonCarrito/>
+                        <BotonCarrito />
                     </div>
                 </div>
             </div>
