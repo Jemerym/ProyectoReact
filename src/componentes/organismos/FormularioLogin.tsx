@@ -41,7 +41,12 @@ function FormularioLogin() {
     if (correo === correoGuardado && contraseña === passwordGuardado) {
       alert("¡Inicio de sesión exitoso!");
       navegacion("/"); 
-    } else {
+    } 
+    else if(correo === "admin@demo.com" && contraseña === "1234"){
+      alert("¡Acceso de administrador!")
+      navegacion("/admin")
+    }
+    else {
       alert("Correo o contraseña incorrectos");
     }
   };
