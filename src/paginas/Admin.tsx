@@ -1,0 +1,12 @@
+function Admin() {
+    return (
+        <div className="container mt-4 text-center">
+            <h1>Inicio</h1>
+            <p>
+                Bienvenido a nuestra tienda.
+            </p>
+        </div>
+    )
+}
+
+export default Admin

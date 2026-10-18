@@ -7,6 +7,7 @@ import Login from './paginas/Login'
 import Registro from './paginas/Registro'
 import Productos from './paginas/Productos'
 import DetalleProducto from './paginas/DetalleProducto'
+import Admin from './paginas/Admin'
 function App() {
   return(
     <>
@@ -34,6 +35,10 @@ function App() {
 
         <Route path='/producto/:id'
         element={<DetalleProducto />} 
+        />
+        <Route
+          path="/admin"
+          element={<Admin />}
         />
       </Routes>
     </>
