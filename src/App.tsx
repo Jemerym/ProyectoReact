@@ -5,6 +5,7 @@ import Navbar from './componentes/organismos/Navbar'
 import Inicio from './paginas/Inicio'
 import Login from './paginas/Login'
 import Registro from './paginas/Registro'
+import Productos from './paginas/Productos'
 function App() {
   return(
     <>
@@ -24,6 +25,10 @@ function App() {
           <Route
           path="/registro"
           element={<Registro />}
+        />
+        <Route
+          path="/productos"
+          element={<Productos />}
         />
       </Routes>
     </>

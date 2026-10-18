@@ -1,0 +1,171 @@
+import CardProductos from "../componentes/moleculas/CardProductos";
+
+function Productos() {
+    return (
+        <div className="container mt-5">
+        <h1>Productos</h1>
+        <br /> <br />
+        <h2>Cilindro de Gas</h2>
+            <div className="d-flex gap-3">
+                <CardProductos
+                    id={1}
+                    codigo="CL001"
+                    nombre="Cilindro GLP 5 kg"
+                    categoria="Cilindros de Gas"
+                    stock={8}
+                    precio={6500}
+                    descripcion="Cilindro de gas licuado de petróleo 5 kg. Para uso residencial (cocina, calefacción pequeña)."
+                    imagen='/img/5kg.jpg'
+                />
+                <CardProductos
+                    id={2}
+                    codigo="CL002"
+                    nombre="Cilindro GLP 11 kg"
+                    categoria="Cilindros de Gas"
+                    stock={12}
+                    precio={12000}
+                    descripcion="Cilindro estándar doméstico. El más utilizado en hogares chilenos. Compatible con reguladores estándar."
+                    imagen='/img/11kg.jpg'
+                />
+                <CardProductos
+                    id={3}
+                    codigo="CL003"
+                    nombre="Cilindro GLP 15 kg"
+                    categoria="Cilindros de Gas"
+                    stock={6}
+                    precio={16000}
+                    descripcion="Cilindro de mayor capacidad para hogares de alto consumo o locales pequeños."
+                    imagen='/img/15kg.png'
+                />
+                <CardProductos
+                    id={4}
+                    codigo="CL004"
+                    nombre="Cilindro GLP 45 kg"
+                    categoria="Cilindros de Gas"
+                    stock={4}
+                    precio={45000}
+                    descripcion="Cilindro industrial. Uso comercial: restaurantes, talleres, calefacción de Locales."
+                    imagen='/img/45kg.png'
+                />
+            </div>
+
+            <br /> <br />
+            <h2>Reguladores</h2>
+            <div className="d-flex gap-3">
+                <CardProductos
+                    id={5}
+                    codigo="RG001"
+                    nombre="Regulador domestico estándar"
+                    categoria="Reguladores"
+                    stock={15}
+                    precio={8990}
+                    descripcion="Regulador de 1 etapa para cilindros 5, 11 y 15 kg. Presion de salida 28 mbar."
+                    imagen='/img/regulador.jpg'
+                />
+                <CardProductos
+                    id={6}
+                    codigo="RG002"
+                    nombre="Regulador de alta presion"
+                    categoria="Reguladores"
+                    stock={7}
+                    precio={18990}
+                    descripcion="Regulador para cocinas industriales o equipos de mayor consumo. Presión regulable."
+                    imagen='/img/rg002.jpg'
+                />
+                <CardProductos
+                    id={7}
+                    codigo="RG003"
+                    nombre="Regulador dual (2 salidas)"
+                    categoria="Reguladores"
+                    stock={5}
+                    precio={14990}
+                    descripcion="Permite conectar dos artefactos simultáneamente al mismo cilindro."
+                    imagen='/img/rg003.jpg'
+                />
+
+            </div>
+             <br /> <br />
+            <h2>Mangueras y Conexiones</h2>
+            <div className="d-flex gap-3">
+                <CardProductos
+                    id={8}
+                    codigo="MG001"
+                    nombre="Manguera gas 1.5 m"
+                    categoria="Mangueras y Conexiones"
+                    stock={20}
+                    precio={3990}
+                    descripcion="Manguera flexible homologada. Diámetro interior 9mm. Compatible con reguladores estándar."
+                    imagen='/img/mg001.jpg'
+                />
+                <CardProductos
+                    id={9}
+                    codigo="MG002"
+                    nombre="Manguera gas 3 m"
+                    categoria="Mangueras y Conexiones"
+                    stock={10}
+                    precio={6990}
+                    descripcion="Manguera larga para instalaciones donde el artefacto está alejado del cilindro."
+                    imagen='/img/mg002.jpg'
+                /><CardProductos
+                    id={10}
+                    codigo="MG003"
+                    nombre="Abrazadera metálica"
+                    categoria="Mangueras y Conexiones"
+                    stock={50}
+                    precio={990}
+                    descripcion="Abrazadera de acero para asegurar la conexión manguera-regulador y manguera-artefacto."
+                    imagen='/img/mg003.jpg'
+                />
+                <CardProductos
+                    id={11}
+                    codigo="MG004"
+                    nombre="Kit conexión completo"
+                    categoria="Mangueras y Conexiones"
+                    stock={12}
+                    precio={12990}
+                    descripcion="Todo lo necesario para instalar un cilindro nuevo (regulador + manguera 1.5m + abrazaderas)."
+                    imagen='/img/mg004.jpg'
+                />
+
+            </div>
+            <br /> <br />
+            <h2>Accesorios</h2>
+            <div className="d-flex gap-3">
+                <CardProductos
+                    id={12}
+                    codigo="AC001"
+                    nombre="Carro porta cilindro"
+                    categoria="Accesorios"
+                    stock={8}
+                    precio={12990}
+                    descripcion="Carro metálico con ruedas para transportar cilindros dentro del hogar con seguridad."
+                    imagen='/img/ac001.jpg'
+                />
+                <CardProductos
+                    id={13}
+                    codigo="AC002"
+                    nombre="Tapa protectora válvula"
+                    categoria="Accesorios"
+                    stock={25}
+                    precio={1490}
+                    descripcion="Tapa de plástico ABS para proteger la válvula del cilindro durante el transporte."
+                    imagen='/img/ac002.jpg'
+                />
+                <CardProductos
+                    id={14}
+                    codigo="AC003"
+                    nombre="Detector de gas"
+                    categoria="Accesorios"
+                    stock={10}
+                    precio={19990}
+                    descripcion="Sensor electroquímico. Alarma sonora y visual ante fuga de gas GLP o metano."
+                    imagen='/img/ac003.jpg'
+                />
+
+    
+            </div>
+        </div>
+    )
+}
+
+export default Productos;
