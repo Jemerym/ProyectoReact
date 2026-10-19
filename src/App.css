@@ -63,9 +63,13 @@ li{
 }
 
 .carta {
+    width: auto;
+    padding: 8px;
     flex: 0 0 auto;
     margin: 0 15px;
 }
+
+
 
 div img{
     border-radius: 10px;
