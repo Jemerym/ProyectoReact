@@ -28,6 +28,14 @@ function FormularioLogin() {
       alert("Debe ingresar su contraseña");
       return;
     }
+    // Si como admin
+    if (correo === "admin@demo.com" && contraseña === "1234") {
+      alert("¡Acceso de administrador!");
+      localStorage.setItem("usuarioActivo", JSON.stringify({ correo, rol: "admin" }));
+      navegacion("/admin");
+      return;
+    }
+
     //el usuario almacenado del localstorage se guarda en una constante para validar si existe
     const usuarioGuardado = localStorage.getItem("usuarioRegistrado");
     //validacion de si existe o no un usuario 
@@ -39,13 +47,19 @@ function FormularioLogin() {
     const { correo: correoGuardado, contraseña: passwordGuardado } = JSON.parse(usuarioGuardado);
 
     if (correo === correoGuardado && contraseña === passwordGuardado) {
-      alert("¡Inicio de sesión exitoso!");
-      navegacion("/"); 
+      const esAdmin = correo.toLowerCase().includes("admin");
+      const rol = esAdmin ? "admin" : "usuario";
+
+      localStorage.setItem("usuarioActivo", JSON.stringify({ correo, rol }));
+
+      if (esAdmin) {
+        alert("¡Acceso de administrador!");
+        navegacion("/admin");
+      } else {
+        alert("¡Inicio de sesión exitoso!");
+        navegacion("/");
+      }
     } 
-    else if(correo === "admin@demo.com" && contraseña === "1234"){
-      alert("¡Acceso de administrador!")
-      navegacion("/admin")
-    }
     else {
       alert("Correo o contraseña incorrectos");
     }
