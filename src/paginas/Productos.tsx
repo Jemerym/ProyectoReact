@@ -146,17 +146,28 @@ export const productos = [
 
 ]
 function Productos() {
+    const categorias = [...new Set(productos.map((p) => p.categoria))]
+
   return (
     <div className="container mt-5">
       <h1 className="text-center">Productos</h1>
       <br /><br />
-      <h2 className="text-center">Cilindro de Gas</h2>
+        {categorias.map((categoria) => (
+          <div key={categoria}>
+            <br /><br />
+            <h2>{categoria}</h2>
+            <div className="d-flex flex-wwarp gap-1">
+              {productos
+                .filter((p) => p.categoria === categoria)
+                .map((p) => (
+              <CardProductos key={p.id} {...p} />
+                ))}
+            </div>
+          </div>  
 
-      <div className="d-flex flex-wrap gap-1">
-        {productos.map((p) => (
-          <CardProductos key={p.id} {...p} />
+
         ))}
-      </div>
+      
     </div>
   );
 }
