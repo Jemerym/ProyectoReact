@@ -153,10 +153,10 @@ function Productos() {
       <h1 className="text-center">Productos</h1>
       <br /><br />
         {categorias.map((categoria) => (
-          <div key={categoria}>
+          <div className="text-center" key={categoria}>
             <br /><br />
             <h2>{categoria}</h2>
-            <div className="d-flex flex-wwarp gap-1">
+            <div className="d-flex flex-warp gap-1 ">
               {productos
                 .filter((p) => p.categoria === categoria)
                 .map((p) => (
