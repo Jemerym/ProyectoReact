@@ -3,7 +3,7 @@ import BotonVolver from "../componentes/atomos/BotonVolver"
 import { useState } from "react"
 import BotonCarrito from "../componentes/atomos/BotonCarrito"
 
-const productos = [
+export const productos = [
     {
         id: 1,
         codigo: "CL001",
