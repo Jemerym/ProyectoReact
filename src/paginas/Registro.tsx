@@ -8,9 +8,7 @@ function Registro() {
                 <div className="col-12 col-md-8 col-lg-6">
                     <div className="card shadow-sm p-4">
                         <h2 className="mb-4 text-center">Crear Cuenta</h2>
-                        
                         <FormularioRegistro />
-
                         <div className="text-center mt-3">
                         <p className="mb-1 text-muted">¿Ya tiene una cuenta?</p>
                         <Link to="/Login" className="btn btn-outline-secondary w-100 fw-bold">

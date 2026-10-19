@@ -27,27 +27,27 @@ const prod = [...productos]
                 <p>
                     Las opciones ideales para tu necesidad, al alcance de un click.
                 </p>
-<div className="mt-4">
-    <h2>Productos destacados</h2>
-    <div className="carrusel-contenedor">
-        <div className="carrusel">
-            {[...prod.slice(0, 4), ...prod.slice(0, 4)].map((producto, index) => (
-                <div className="carta" key={`${producto.id}-${index}`}>
-                    <CardProductos
-                        id={producto.id}
-                        nombre={producto.nombre}
-                        codigo={producto.codigo}
-                        categoria={producto.categoria}
-                        stock={producto.stock}
-                        precio={producto.precio}
-                        descripcion={producto.descripcion}
-                        imagen={producto.imagen}
-                    />
+                <div className="mt-4">
+                    <h2>Productos destacados</h2>
+                    <div className="carrusel-contenedor">
+                        <div className="carrusel">
+                            {[...prod.slice(0, 4), ...prod.slice(0, 4)].map((producto, index) => (
+                                <div className="carta" key={`${producto.id}-${index}`}>
+                                    <CardProductos
+                                        id={producto.id}
+                                        nombre={producto.nombre}
+                                        codigo={producto.codigo}
+                                        categoria={producto.categoria}
+                                        stock={producto.stock}
+                                        precio={producto.precio}
+                                        descripcion={producto.descripcion}
+                                        imagen={producto.imagen}
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
-            ))}
-        </div>
-    </div>
-</div>
             </div>
         </div>
     );

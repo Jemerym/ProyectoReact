@@ -24,7 +24,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg ">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="logo">
         EL <span>VOLCAN</span>
       </div>

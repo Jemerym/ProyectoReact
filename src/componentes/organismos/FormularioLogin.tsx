@@ -28,7 +28,7 @@ function FormularioLogin() {
       alert("Debe ingresar su contraseña");
       return;
     }
-    // Si como admin
+    // Si como ingresa como admim
     if (correo === "admin@demo.com" && contraseña === "1234") {
       alert("¡Acceso de administrador!");
       localStorage.setItem("usuarioActivo", JSON.stringify({ correo, rol: "admin" }));

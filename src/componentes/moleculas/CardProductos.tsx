@@ -1,22 +1,24 @@
 import Boton from "../atomos/Boton";
-
+import BotonEliminar from "../atomos/BotonEliminar";
+import BotonModificar from "../atomos/BotonModificar";
 interface CardProductosProps {
-    id : number;
-    codigo : string;
-    nombre : string;
-    categoria : string;
-    stock : number;
-    precio : number;
-    descripcion : string;
-    imagen : string;
+  id: number;
+  codigo: string;
+  nombre: string;
+  categoria: string;
+  stock: number;
+  precio: number;
+  descripcion: string;
+  imagen: string;
+  //se asignan como bolean 
+  onEliminar?: () => void;
+  onModificar?: () => void;
 }
-
-function CardProductos({ id , codigo , nombre, categoria, stock , precio, descripcion, imagen }: CardProductosProps) {
-
+function CardProductos({ id, nombre, categoria, stock, precio, descripcion, imagen, onEliminar, onModificar }: CardProductosProps) {
     return (
         <div className="card-container">
             
-            <div className="card h-100" style={{ width: '20rem' }}>
+            <div className="card h-100" >
                 <div className="bg-white p-2 d-flex ">
                 <span className="bg-secondary text-white fw-bold px-3 py-1 rounded-pill small">
                     {categoria}
@@ -47,6 +49,13 @@ function CardProductos({ id , codigo , nombre, categoria, stock , precio, descri
                     <div className="d-flex gap-4 mt-auto">
                         <Boton id={id}/>
                     </div>
+                    {/*nuevo botones que se muestran dependiendo del rol del usuario */}
+                    {(onModificar || onEliminar) && (
+                    <div className="d-flex gap-2 mt-2">
+                        {onModificar && <BotonModificar alClickear={onModificar} />}
+                        {onEliminar && <BotonEliminar alClikear={onEliminar} />}
+                    </div>
+)}
                 </div>
             </div>
         </div>
