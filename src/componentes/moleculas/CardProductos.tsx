@@ -17,8 +17,8 @@ function CardProductos({ id , codigo , nombre, categoria, stock , precio, descri
         <div className="card-container">
             
             <div className="card h-100" style={{ width: '20rem' }}>
-                <div className="bg-black p-2 d-flex ">
-                <span className="bg-white text-dark fw-bold px-3 py-1 rounded-pill small">
+                <div className="bg-white p-2 d-flex ">
+                <span className="bg-secondary text-white fw-bold px-3 py-1 rounded-pill small">
                     {categoria}
                 </span>
                 <span className="bg-warning text-dark fw-bold px-3 py-1 rounded-pill small ms-auto">
