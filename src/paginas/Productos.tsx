@@ -53,11 +53,12 @@ function Productos() {
         <div className="text-center" key={categoria}>
           <br /><br />
           <h2>{categoria}</h2>
+          <br />
           <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
             {productos
               .filter((p) => p.categoria === categoria)
               .map((p) => (
-                <div className="col" key={p.id}>
+                <div className="col " key={p.id}>
                   <CardProductos
                     {...p}
                     onModificar={admin ? () => modificar(p.id) : undefined}

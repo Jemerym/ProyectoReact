@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 function Login() {
     return (
+        
         <div className="container mt-5">
             <div className="row justify-content-center">
                 <div className="col-12 col-md-8 col-lg-6">
@@ -22,6 +23,7 @@ function Login() {
                 </div>
             </div>
         </div>
+        
     );
 }
 

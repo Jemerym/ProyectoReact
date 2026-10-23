@@ -1,7 +1,9 @@
 import CardProductos from '../componentes/moleculas/CardProductos';
+import Footer from '../componentes/organismos/Footer';
 import { productos } from './Productos';function admin(){
 const prod = [...productos]
     return (
+        <>
         <div className="container mt-4">
             <img src='/img/Banner.png'
                  alt="banner"
@@ -35,6 +37,8 @@ const prod = [...productos]
                 </div>
             </div>
         </div>
+        <Footer />
+        </>
     );
 }
 

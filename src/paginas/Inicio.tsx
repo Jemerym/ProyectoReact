@@ -17,6 +17,7 @@ function Inicio() {
     }, [navegacion]);
 const prod = [...productos]
     return (
+        
         <div className="container mt-4">
             <img src='/img/Banner.png'
                  alt="banner"
@@ -50,6 +51,7 @@ const prod = [...productos]
                 </div>
             </div>
         </div>
+            
     );
 }
 
