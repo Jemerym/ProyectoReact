@@ -50,6 +50,40 @@ const prod = [...productos]
                     </div>
                 </div>
             </div>
+
+            <div className='container mt-4 text-center'>
+                <div className="text-center mb-4">
+                    <h2>¿Por que elegir El Volcan?</h2>
+                    <p className="text-muted">Ventajas pensadas para tu comodidad y tranquilidad</p>
+                </div>
+                <div className="row g-4">
+                    <div className="col-12 col-sm-6 col-md-3">
+                        <div className="bg-dark text-white card border shadow-sm p-3 rounded-4 h-100">
+                            <h3 className="text-warning">Entrega Express</h3>
+                            <p className="text-light">Llegamos a tu domicilio en tiempo record para que no te quedes sin gas</p>
+                        </div>
+                    </div>
+                    <div className="col-12 col-sm-6 col-md-3">
+                        <div className="bg-dark text-white card border shadow-sm p-3 rounded-4 h-100">
+                            <h3 className="text-warning">Pago Seguro</h3>
+                            <p className="text-light">Aceptamos tarjetas de debito, credito, efectivo y transferencias al recibir</p>
+                        </div>
+                    </div>
+                    <div className="col-12 col-sm-6 col-md-3">
+                        <div className="bg-dark text-white card border shadow-sm p-3 rounded-4 h-100">
+                            <h3 className="text-warning">Cilindros Seguros</h3>
+                            <p className="text-light">Todos nuestros envases cumplen con estrictos controles de seguridad e higiene</p>
+                        </div>
+                    </div>
+                    <div className="col-12 col-sm-6 col-md-3">
+                        <div className="bg-dark text-white card border shadow-sm p-3 rounded-4 h-100">
+                            <h3 className="text-warning">Atencion Directa</h3>
+                            <p className="text-light">Soporte rapido para resolver tus dudas antes, durante y despues de tu pedido</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
             
     );
