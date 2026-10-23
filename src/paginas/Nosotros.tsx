@@ -3,8 +3,10 @@ function Nosotros() {
         
         <div className="container mt-4 text-center" style={{ maxWidth: '800px' }}>
             <div>
+                <br />
             <h1>Sobre nosotros</h1>
             <p>Gas a domicilio, rapido y al mejor precio</p>
+            <br />
             </div>
             <div className='card bg-dark text-white shadow-sm p-4 rounded-4' >
                 <div className='row align-items-center'>
@@ -25,9 +27,9 @@ function Nosotros() {
             </div>
 
             <section className="container mt-5">
-            <div className='row text-center'>
+            <div className='row text-center g-4 mb-3'>
                 <div className='col-md-4'>
-                    <div className='bg-dark text-white card border shadow-sm p-4 rounded-4'>
+                    <div className='bg-dark text-white card border shadow-sm p-3 rounded-4 h-100'>
                         <h4 className='text-warning'>Rapidez</h4>
                         <p className='text-light'>
                             Entregamos tu gas a domicilio en el menor tiempo posible.
@@ -35,7 +37,7 @@ function Nosotros() {
                     </div>
                 </div>
                 <div className='col-md-4'>
-                    <div className='bg-dark text-white card border shadow-sm p-4 rounded-4'>
+                    <div className='bg-dark text-white card border shadow-sm p-3 rounded-4 h-100'>
                         <h4 className='text-warning'>Seguridad</h4>
                         <p className='text-light'>
                             Trabajamos con productos de calidad y cumplimos con todas las normas de seguridad.
@@ -43,7 +45,7 @@ function Nosotros() {
                     </div>
                 </div>
                 <div className='col-md-4'>
-                    <div className='bg-dark text-white card border shadow-sm p-4 rounded-4'>
+                    <div className='bg-dark text-white card border shadow-sm p-3 rounded-4 h-100'>
                         <h4 className='text-warning'>Calidad</h4>
                         <p className='text-light'>
                             Ofrecemos productos de alta calidad y servicio excepcional.
