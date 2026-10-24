@@ -10,6 +10,7 @@ import DetalleProducto from './paginas/DetalleProducto'
 import Admin from './paginas/Admin'
 import Nosotros from './paginas/Nosotros'
 import Footer from './componentes/organismos/Footer'
+import Contacto from './paginas/Contacto'
 function App() {
   return(
     <div className='d-flex flex-column min-vh-100'>
@@ -38,6 +39,11 @@ function App() {
         <Route
           path="/nosotros"
           element={<Nosotros />}
+        />
+
+        <Route
+          path="/contacto"
+          element={<Contacto />}
         />
 
         <Route path='/producto/:id'

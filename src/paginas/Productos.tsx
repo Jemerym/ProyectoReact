@@ -48,11 +48,11 @@ function Productos() {
   };
   return (
     <div className="container mt-5">
-      <h1 className="text-center">Productos</h1>
+      <h1 className="text-center fw-bold">Productos</h1>
       {categorias.map((categoria) => (
         <div className="text-center" key={categoria}>
           <br /><br />
-          <h2>{categoria}</h2>
+          <h2 className="fw-normal">{categoria}</h2>
           <br />
           <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
             {productos

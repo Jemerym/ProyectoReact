@@ -24,12 +24,12 @@ const prod = [...productos]
                  className="img-fluid"
                  style={{ borderRadius: '10px'}} />    
             <div className="container mt-4 text-center">
-                <h1>Descubre los servicios y productos que ofrecemos</h1>
-                <p>
+                <h1 className="fw-bold">Descubre los servicios y productos que ofrecemos</h1>
+                <p className="fw-semibold">
                     Las opciones ideales para tu necesidad, al alcance de un click.
                 </p>
                 <div className="mt-4">
-                    <h2>Productos destacados</h2>
+                    <h2 className="fw-bold">Productos destacados</h2>
                     <div className="carrusel-contenedor">
                         <div className="carrusel">
                             {[...prod.slice(0, 4), ...prod.slice(0, 4)].map((producto, index) => (
@@ -53,8 +53,8 @@ const prod = [...productos]
 
             <div className='container mt-4 text-center'>
                 <div className="text-center mb-4">
-                    <h2>¿Por que elegir El Volcan?</h2>
-                    <p className="text-muted">Ventajas pensadas para tu comodidad y tranquilidad</p>
+                    <h2 className='fw-bold'>¿Por que elegir El Volcan?</h2>
+                    <p className="text-muted fw-semibold">Ventajas pensadas para tu comodidad y tranquilidad</p>
                 </div>
                 <div className="row g-4">
                     <div className="col-12 col-sm-6 col-md-3">

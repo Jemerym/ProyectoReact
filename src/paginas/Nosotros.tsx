@@ -4,8 +4,8 @@ function Nosotros() {
         <div className="container mt-4 text-center" style={{ maxWidth: '800px' }}>
             <div>
                 <br />
-            <h1>Sobre nosotros</h1>
-            <p>Gas a domicilio, rapido y al mejor precio</p>
+            <h1 className="fw-bold">Sobre nosotros</h1>
+            <p className="fw-semibold">Gas a domicilio, rapido y al mejor precio</p>
             <br />
             </div>
             <div className='card bg-dark text-white shadow-sm p-4 rounded-4' >
