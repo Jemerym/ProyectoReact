@@ -13,6 +13,12 @@ function Carrito() {
     localStorage.setItem("carrito", JSON.stringify(nuevo));
   };
 
+  const pagar = () => {
+    alert("La compra fue realizada con exito")
+    setCarrito([])
+    localStorage.removeItem("carrito")
+  }
+
   // Vaciar todo el carrito
   const vaciar = () => {
     setCarrito([]);
@@ -70,6 +76,10 @@ function Carrito() {
               Vaciar Carrito
             </button>
             <h4 className="m-0 fw-bold">Total a pagar: ${total}</h4>
+
+            <button className="btn btn-outline-danger btn-sm" onClick={pagar}>
+                Pagar
+            </button>
           </div>
         </div>
       )}
