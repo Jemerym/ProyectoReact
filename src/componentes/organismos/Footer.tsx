@@ -1,6 +1,6 @@
 function Footer() {
     return(
-        <footer className="bg-dark text-white py-4 mt-auto">
+        <footer className="bg-dark text-white py-5 mt-5">
             <div className="container text-center">
                 <h3 className='mb-3 text-warning'>El Volcan</h3>
                 <p className='text-light'>Gas a domicilio, rapido, seguro y al mejor precio para tu hogar o negocio</p>

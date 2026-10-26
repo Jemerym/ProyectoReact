@@ -18,7 +18,7 @@ function CardProductos({ id, nombre, categoria, stock, precio, descripcion, imag
     return (
         <div className="card-container">
             
-            <div className="card h-100" >
+            <div className="card h-100" style={{ width: '20rem' }}  >
                 <div className="bg-white p-2 d-flex ">
                 <span className="bg-secondary text-white fw-bold px-3 py-1 rounded-pill small">
                     {categoria}
@@ -34,7 +34,6 @@ function CardProductos({ id, nombre, categoria, stock, precio, descripcion, imag
                     alt = {nombre}
                     style={{height: '200px', objectFit: 'contain'}}
                 />
-
                 <div className="card-body d-flex flex-column">
                     <h5 className = "card-title fw-bold">
                         {nombre}
@@ -42,7 +41,6 @@ function CardProductos({ id, nombre, categoria, stock, precio, descripcion, imag
                     <p className = "card-text">
                         {descripcion}
                     </p>
-
                     <h4 className = "card-text fw-bold">
                     ${Number(precio).toLocaleString('es-CL')}
                     </h4>
@@ -54,8 +52,7 @@ function CardProductos({ id, nombre, categoria, stock, precio, descripcion, imag
                     <div className="d-flex gap-2 mt-2">
                         {onModificar && <BotonModificar alClickear={onModificar} />}
                         {onEliminar && <BotonEliminar alClikear={onEliminar} />}
-                    </div>
-)}
+                    </div>)}
                 </div>
             </div>
         </div>

@@ -23,4 +23,4 @@ function Input({ tipo, nombre, valor, alCambiar}: Props){
 
 }
 
-export default Input;
+export default Input;   

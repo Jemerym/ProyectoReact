@@ -32,7 +32,7 @@ const prod = [...productos]
                     <h2 className="fw-bold">Productos destacados</h2>
                     <div className="carrusel-contenedor">
                         <div className="carrusel">
-                            {[...prod.slice(0, 4), ...prod.slice(0, 4)].map((producto, index) => (
+                            {[...prod.slice(0, 4)].map((producto, index) => (
                                 <div className="carta" key={`${producto.id}-${index}`}>
                                     <CardProductos
                                         id={producto.id}

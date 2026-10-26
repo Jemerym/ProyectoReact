@@ -57,7 +57,7 @@ li{
   width: 100%;             
   max-width: 1000px;      
   margin: 0 auto;         
-  overflow: hidden;
+  overflow: auto;
   position: relative;
   padding: 20px 0;
   border: 3px solid black; 
@@ -68,7 +68,7 @@ li{
 .carrusel {
   display: flex;
   width: max-content;
-  animation: loop 20s linear infinite;
+  /*animation: loop 20s linear infinite;*/
 }
 
 .carrusel:hover {
@@ -76,6 +76,7 @@ li{
 }
 
 .carta {
+  
   width: auto;
   padding: 8px;
   flex: 0 0 300px;

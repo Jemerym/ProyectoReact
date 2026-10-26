@@ -31,6 +31,7 @@ export const productos = [
     descripcion: "Sensor electroquímico. Alarma sonora y visual ante fuga de gas GLP o metano.",imagen: '/img/ac003.jpg'}
 ]
 function Productos() {
+  const carrito = JSON.parse(localStorage.getItem("carrito") || "[]");
   const [contador, setContador] = useState("");
   const admin = JSON.parse(localStorage.getItem("usuarioActivo") || "{}").rol === "admin";
   const categorias = [...new Set(productos.map((p) => p.categoria))];
@@ -54,18 +55,23 @@ function Productos() {
           <br /><br />
           <h2 className="fw-normal">{categoria}</h2>
           <br />
-          <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
+          <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3 ">
             {productos
               .filter((p) => p.categoria === categoria)
-              .map((p) => (
-                <div className="col " key={p.id}>
-                  <CardProductos
-                    {...p}
-                    onModificar={admin ? () => modificar(p.id) : undefined}
-                    onEliminar={admin ? () => eliminar(p.id) : undefined}
-                  />
-                </div>
-              ))}
+              .map((p) => {
+                const enCarrito = carrito.find((item: any) => item.id === p.id)?.cantidad || 0;
+                const stockDisponible = p.stock - enCarrito;
+                return (
+                  <div className="col h-100" key={p.id}>
+                    <CardProductos
+                      {...p}
+                      stock={stockDisponible}
+                      onModificar={admin ? () => modificar(p.id) : undefined}
+                      onEliminar={admin ? () => eliminar(p.id) : undefined}
+                    />
+                  </div>
+                );
+              })}
           </div>
         </div>
       ))}
