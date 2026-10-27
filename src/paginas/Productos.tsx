@@ -62,7 +62,7 @@ function Productos() {
                 const enCarrito = carrito.find((item: any) => item.id === p.id)?.cantidad || 0;
                 const stockDisponible = p.stock - enCarrito;
                 return (
-                  <div className="col h-100" key={p.id}>
+                  <div className="col" key={p.id}>
                     <CardProductos
                       {...p}
                       stock={stockDisponible}
