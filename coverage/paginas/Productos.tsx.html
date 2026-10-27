@@ -1,0 +1,325 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Code coverage report for paginas/Productos.tsx</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+    
+<body>
+<div class='wrapper'>
+    <div class='pad1'>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">paginas</a> Productos.tsx</h1>
+        <div class='clearfix'>
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">53.57% </span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>15/28</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">44.44% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>8/18</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">50% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>6/12</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">56.52% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>13/23</span>
+            </div>
+        
+            
+        </div>
+        <p class="quiet">
+            Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
+        </p>
+        <template id="filterTemplate">
+            <div class="quiet">
+                Filter:
+                <input type="search" id="fileSearch">
+            </div>
+        </template>
+    </div>
+    <div class='status-line medium'></div>
+    <pre><table class="coverage">
+<tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
+<a name='L2'></a><a href='#L2'>2</a>
+<a name='L3'></a><a href='#L3'>3</a>
+<a name='L4'></a><a href='#L4'>4</a>
+<a name='L5'></a><a href='#L5'>5</a>
+<a name='L6'></a><a href='#L6'>6</a>
+<a name='L7'></a><a href='#L7'>7</a>
+<a name='L8'></a><a href='#L8'>8</a>
+<a name='L9'></a><a href='#L9'>9</a>
+<a name='L10'></a><a href='#L10'>10</a>
+<a name='L11'></a><a href='#L11'>11</a>
+<a name='L12'></a><a href='#L12'>12</a>
+<a name='L13'></a><a href='#L13'>13</a>
+<a name='L14'></a><a href='#L14'>14</a>
+<a name='L15'></a><a href='#L15'>15</a>
+<a name='L16'></a><a href='#L16'>16</a>
+<a name='L17'></a><a href='#L17'>17</a>
+<a name='L18'></a><a href='#L18'>18</a>
+<a name='L19'></a><a href='#L19'>19</a>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">56x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">224x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">56x</span>
+<span class="cline-any cline-yes">56x</span>
+<span class="cline-any cline-yes">56x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useState } from "react";
+import CardProductos from "../componentes/moleculas/CardProductos";
+export const productos = [
+    {id: 1,codigo: "CL001",nombre: "Cilindro GLP 5 kg",categoria: "Cilindros de Gas",stock: 8,precio: 6500,
+    descripcion: "Cilindro de gas licuado de petróleo 5 kg. Para uso residencial (cocina, calefacción pequeña).",imagen: '/img/5kg.jpg'},
+    {id: 2,codigo: "CL002",nombre: "Cilindro GLP 11 kg",categoria: "Cilindros de Gas",stock: 12,precio: 12000,
+    descripcion: "Cilindro estándar doméstico. El más utilizado en hogares chilenos. Compatible con reguladores estándar.",imagen: '/img/11kg.jpg'},
+    {id: 3,codigo: "CL003",nombre: "Cilindro GLP 15 kg",categoria: "Cilindros de Gas",stock: 6,precio: 16000,
+    descripcion: "Cilindro de mayor capacidad para hogares de alto consumo o locales pequeños.",imagen: '/img/15kg.png'},
+    {id: 4,codigo: "CL004",nombre: "Cilindro GLP 45 kg",categoria: "Cilindros de Gas",stock: 4,precio: 45000,
+    descripcion: "Cilindro industrial. Uso comercial: restaurantes, talleres, calefacción de locales.",imagen: '/img/45kg.png'},
+    {id: 5,codigo: "RG001",nombre: "Regulador domestico estándar",categoria: "Reguladores",stock: 15,precio: 8990,
+    descripcion: "Regulador de 1 etapa para cilindros 5, 11 y 15 kg. Presion de salida 28 mbar.",imagen: '/img/regulador.jpg'},
+    {id: 6,codigo: "RG002",nombre: "Regulador de alta presion",categoria: "Reguladores",stock: 7,precio: 18990,
+    descripcion: "Regulador de cocinas industriales o equipo de mayor consumo. Presión regulable.",imagen: '/img/rg002.jpg'},
+    {id: 7,codigo: "RG003",nombre: "Regulador dual (2 salidas)",categoria: "Reguladores",stock: 5,precio: 14990,
+    descripcion: "Permite conectar dos artefactos simultaneamente al mismo cilindro.",imagen: '/img/rg003.jpg'},
+    {id: 8,codigo: "MG001",nombre: "Manguera gas 1.5 m",categoria: "Manguera y Conexiones",stock: 20,precio: 3990,
+    descripcion: "Manguera flexible homologada. Diámetro interior 9mm. Compatible con reguladores estandar.",imagen: '/img/mg001.jpg'},
+    {id: 9,codigo: "MG002",nombre: "Manguera gas 3 m",categoria: "Manguera y Conexiones",stock: 10,precio: 6990,
+    descripcion: "Manguera larga para instalaciones donde el artefacto esta alejado del cilindro.",imagen: '/img/mg002.jpg'},
+    {id: 10,codigo: "MG003",nombre: "Abrazadera metálica",categoria: "Manguera y Conexiones",stock: 50,precio: 990,
+    descripcion: "Abrazadera de acero para asegurar la conexión manguera-regulador y manguera-artefacto.",imagen: '/img/mg003.jpg'},
+    {id: 11,codigo: "MG004",nombre: "Kit conexión completo",categoria: "Manguera y Conexiones",stock: 12,precio: 12990,
+    descripcion: "Todo lo necesario para instalar un cilindro nuevo (regulador + manguera 1.5m + abrazaderas).",imagen: '/img/mg004.jpg'},
+    {id: 12, codigo: "AC001",nombre: "Carro porta cilindros",categoria: "Accesorios",stock: 8,precio: 12990,
+    descripcion: "Carro metálico con ruedas para transportar cilindros dentro del hogar con seguridad.",imagen: '/img/ac001.jpg'},
+    {id: 13,codigo: "AC002",nombre: "Tapa protectora válvula",categoria: "Accesorios",stock: 25,precio: 1490,
+    descripcion: "Tapa de plástico ABS para proteger la válvula del cilindro durante el transporte.",imagen: '/img/ac002.jpg'},
+    {id: 14,codigo: "AC003",nombre: "Detector de gas",categoria: "Accesorios",stock: 10,precio: 19990,
+    descripcion: "Sensor electroquímico. Alarma sonora y visual ante fuga de gas GLP o metano.",imagen: '/img/ac003.jpg'}
+]
+function Productos() {
+  const carrito = JSON.parse(localStorage.getItem("carrito") || "[]");
+  const [contador, setContador] = useState("");
+  const admin = JSON.parse(localStorage.getItem("usuarioActivo") || "{}").rol === "admin";
+  const categorias = [...new Set(productos.map((p) =&gt; p.categoria))];
+  const <span class="fstat-no" title="function not covered" >eliminar = (i</span>d: number) =&gt; {
+<span class="cstat-no" title="statement not covered" >    productos.splice(productos.<span class="fstat-no" title="function not covered" >findIndex((p</span>) =&gt; <span class="cstat-no" title="statement not covered" >p.id === id)</span>, 1);</span>
+<span class="cstat-no" title="statement not covered" >    setContador(contador + 1);</span>
+  };
+  const <span class="fstat-no" title="function not covered" >modificar = (i</span>d: number) =&gt; {
+    const p = <span class="cstat-no" title="statement not covered" >productos.<span class="fstat-no" title="function not covered" >find((p</span>) =&gt; <span class="cstat-no" title="statement not covered" >p.id === id)</span>;</span>
+<span class="cstat-no" title="statement not covered" >    if (!p) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >    p.nombre = prompt("Nombre:", p.nombre) || p.nombre;</span>
+<span class="cstat-no" title="statement not covered" >    p.precio = Number(prompt("Precio:", String(p.precio))) || p.precio;</span>
+<span class="cstat-no" title="statement not covered" >    p.stock = Number(prompt("Stock:", String(p.stock))) || p.stock;</span>
+<span class="cstat-no" title="statement not covered" >    setContador(contador + 1);</span>
+  };
+  return (
+    &lt;div className="container mt-5"&gt;
+      &lt;h1 className="text-center fw-bold"&gt;Productos&lt;/h1&gt;
+      {categorias.map((categoria) =&gt; (
+        &lt;div className="text-center" key={categoria}&gt;
+          &lt;br /&gt;&lt;br /&gt;
+          &lt;h2 className="fw-normal"&gt;{categoria}&lt;/h2&gt;
+          &lt;br /&gt;
+          &lt;div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3 "&gt;
+            {productos
+              .filter((p) =&gt; p.categoria === categoria)
+              .map((p) =&gt; {
+                const enCarrito = carrito.find((item: any) =&gt; item.id === p.id)?.cantidad || 0;
+                const stockDisponible = p.stock - enCarrito;
+                return (
+                  &lt;div className="col h-100" key={p.id}&gt;
+                    &lt;CardProductos
+                      {...p}
+                      stock={stockDisponible}
+                      onModificar={<span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >admin ? () =&gt; <span class="cstat-no" title="statement not covered" >m</span>odificar(p.id) : u</span></span>ndefined}
+                      onEliminar={<span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >admin ? () =&gt; <span class="cstat-no" title="statement not covered" >e</span>liminar(p.id) : u</span></span>ndefined}
+                    /&gt;
+                  &lt;/div&gt;
+                );
+              })}
+          &lt;/div&gt;
+        &lt;/div&gt;
+      ))}
+    &lt;/div&gt;
+  );
+}
+export default Productos;</pre></td></tr></table></pre>
+
+                <div class='push'></div><!-- for sticky footer -->
+            </div><!-- /wrapper -->
+            <div class='footer quiet pad2 space-top1 center small'>
+                Code coverage generated by
+                <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+                at 2026-10-27T04:32:22.454Z
+            </div>
+        <script src="../prettify.js"></script>
+        <script>
+            window.onload = function () {
+                prettyPrint();
+            };
+        </script>
+        <script src="../sorter.js"></script>
+        <script src="../block-navigation.js"></script>
+    </body>
+</html>
+    
