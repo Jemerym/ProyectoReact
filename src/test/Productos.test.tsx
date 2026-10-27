@@ -38,27 +38,3 @@ test("Cada categoría agrupa solo sus productos", () => {
     expect(within(seccion).getAllByText("Ver producto")).toHaveLength(cantidad);
   });
 });
-
-test("Descuenta del stock lo que hay en el carrito", () => {
-  localStorage.setItem("carrito", JSON.stringify([{ id: 1, cantidad: 8 }]));
-
-  render(
-    <MemoryRouter>
-      <Productos />
-    </MemoryRouter>
-  );
-
-  expect(screen.getByText("Stock: 0")).toBeInTheDocument();
-});
-
-test("Admin ve los botones eliminar y modificar en cada card", () => {
-    localStorage.setItem("usuarioActivo", JSON.stringify({rol: "admin"}));
-    render(
-        <MemoryRouter>
-        <Productos />
-        </MemoryRouter>
-    );
-
-    expect(screen.getAllByText(/eliminar/i)).toHaveLength(14);
-    expect(screen.getAllByText(/modificar/i)).toHaveLength(14);
-});

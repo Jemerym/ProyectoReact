@@ -3,10 +3,8 @@ import { Link } from "react-router-dom";
 import BotonEliminar from "../componentes/atomos/BotonEliminar";
 
 function Carrito() {
-  // Leemos el carrito desde localStorage
   const [carrito, setCarrito] = useState(() => JSON.parse(localStorage.getItem("carrito") || "[]"));
 
-  // Eliminar un producto
   const eliminar = (id: number) => {
     const nuevo = carrito.filter((p: any) => p.id !== id);
     setCarrito(nuevo);
@@ -19,13 +17,11 @@ function Carrito() {
     localStorage.removeItem("carrito")
   }
 
-  // Vaciar todo el carrito
   const vaciar = () => {
     setCarrito([]);
     localStorage.removeItem("carrito");
   };
 
-  // Calcular total a pagar
   const total = carrito.reduce((sum: number, p: any) => sum + p.precio * p.cantidad, 0);
 
   return (

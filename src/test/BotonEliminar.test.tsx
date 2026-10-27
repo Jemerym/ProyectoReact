@@ -3,7 +3,7 @@ import { test, expect, vi} from "vitest";
 import BotonEliminar from "../componentes/atomos/BotonEliminar";
 import { fireEvent, render, screen } from "@testing-library/react";
 import '@testing-library/jest-dom/vitest'
-test('debe ejecutar la funcion onClick al hacer click en el boton ', ()=>{
+test('debe ejecutar la funcion Eliminar al hacer click en el boton ', ()=>{
 
     const funcion = vi.fn()
     render (<BotonEliminar alClikear={funcion}/>);
