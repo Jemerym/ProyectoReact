@@ -44,12 +44,15 @@ function Navbar() {
       <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul className="navbar-nav links">
           <li className="nav-item"><Link className="nav-link" to={esAdmin ? "/admin" : "/"}>Inicio</Link></li>
+          {esAdmin && (<li className="nav-item"><Link className="nav-link" to="/admin">Panel Admin</Link></li>)}
           <li className="nav-item"><Link className="nav-link" to="/productos">Catalogo</Link></li>
           <li className="nav-item"><Link className="nav-link" to="/nosotros">Nosotros</Link></li>
-          <li className="nav-item"><Link className="nav-link" to="/contacto">Contacto</Link></li>
+          {!esAdmin && (<li className="nav-item"><Link className="nav-link" to="/contacto">Contacto</Link></li> )}
+          {esAdmin && (<li className="nav-item"><Link className="nav-link" to="/ListadoMensajeria">Mensajeria</Link></li>
+          )}
           <li className="nav-item"><Link className="nav-link" to="/carrito">Carrito</Link></li>
           <li className="nav-item">
-            {usuario ? (
+            {usuario ?  (
               <a
                 href="#logout"
                 className="nav-link"
