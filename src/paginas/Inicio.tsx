@@ -1,10 +1,21 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CardProductos from '../componentes/moleculas/CardProductos';
-import { productos } from './Productos';
+
+interface Producto {
+  id: number;
+  codigo: string;
+  nombre: string;
+  categoria: string;
+  stock: number;
+  precio: number;
+  descripcion: string;
+  imagen: string;
+}
 
 function Inicio() {
     const navegacion = useNavigate();
+    const [productos, setProductos] = useState<Producto[]>([]);
 
     useEffect(() => {
         const sesion = localStorage.getItem("usuarioActivo");
@@ -15,7 +26,17 @@ function Inicio() {
             }
         }
     }, [navegacion]);
-const prod = [...productos]
+
+    useEffect(() => {
+        fetch("http://localhost:8083/api/productos")
+            .then((res) => {
+                if (!res.ok) throw new Error("Error al cargar productos");
+                return res.json();
+            })
+            .then((data) => setProductos(data))
+            .catch((err) => console.error("Error cargando destacados: ", err));
+    }, []);
+
     return (
         
         <div className="container mt-4">
@@ -30,24 +51,26 @@ const prod = [...productos]
                 </p>
                 <div className="mt-4">
                     <h2 className="fw-bold">Productos destacados</h2>
-                    <div className="carrusel-contenedor">
-                        <div className="carrusel">
-                            {[...prod.slice(0, 4)].map((producto, index) => (
-                                <div className="carta" key={`${producto.id}-${index}`}>
-                                    <CardProductos
-                                        id={producto.id}
-                                        nombre={producto.nombre}
-                                        codigo={producto.codigo}
-                                        categoria={producto.categoria}
-                                        stock={producto.stock}
-                                        precio={producto.precio}
-                                        descripcion={producto.descripcion}
-                                        imagen={producto.imagen}
-                                    />
-                                </div>
-                            ))}
+                      {productos.length > 0 && (
+                        <div className="carrusel-contenedor">
+                            <div className="carrusel">
+                                {[...productos.slice(0, 4)].map((item, index) => (
+                                    <div className="carta" key={`${item.id}-${index}`}>
+                                        <CardProductos
+                                            id={item.id}
+                                            nombre={item.nombre}
+                                            codigo={item.codigo}
+                                            categoria={item.categoria}
+                                            stock={item.stock}
+                                            precio={item.precio}
+                                            descripcion={item.descripcion}
+                                            imagen={item.imagen}
+                                        />
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
             </div>
 

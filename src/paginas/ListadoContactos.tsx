@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-interface contacto {
+interface Contacto {
     id: number;
     nombreCompleto: String;
     correo: String;
@@ -8,10 +8,10 @@ interface contacto {
 }
 
 function ListadoContacto() {
-    const [contactos, setContactos] = useState<contacto[]>([]);
+    const [contactos, setContactos] = useState<Contacto[]>([]);
 
     useEffect(() => {
-        fetch("http://locahost:8082/api/contactos")
+        fetch("http://localhost:8082/api/contactos")
             .then((respuesta) => {
                 if (!respuesta.ok) {
                     throw new Error("Error al consultar los contactos");
@@ -21,6 +21,19 @@ function ListadoContacto() {
             .then((datos) => setContactos(datos))
             .catch(() => alert("No se pudieron cargar los contactos"));
     }, []);
-} 
 
+    return(
+        <div className="container mt-5">
+            <h2>Contactos recibidos</h2>
+
+            {contactos.map((contacto) => (
+                <div className="card p-3 mb-3" key={contacto.id}>
+                    <h5>{contacto.nombreCompleto}</h5>
+                    <p>{contacto.correo}</p>
+                    <p>{contacto.mensaje}</p>
+                </div>
+            ))}
+        </div>
+    );
+}
 export default ListadoContacto;

@@ -47,9 +47,9 @@ function Navbar() {
           {esAdmin && (<li className="nav-item"><Link className="nav-link" to="/admin">Panel Admin</Link></li>)}
           <li className="nav-item"><Link className="nav-link" to="/productos">Catalogo</Link></li>
           <li className="nav-item"><Link className="nav-link" to="/nosotros">Nosotros</Link></li>
-          {!esAdmin && (<li className="nav-item"><Link className="nav-link" to="/contacto">Contacto</Link></li> )}
-          {esAdmin && (<li className="nav-item"><Link className="nav-link" to="/ListadoMensajeria">Mensajeria</Link></li>
-          )}
+          <li className="nav-item"><Link className="nav-link" to="/contacto">Contacto</Link></li>
+          <li className="nav-item"><Link className="nav-link" to="/listadoContactos">Mensajeria</Link></li>
+          
           <li className="nav-item"><Link className="nav-link" to="/carrito">Carrito</Link></li>
           <li className="nav-item">
             {usuario ?  (

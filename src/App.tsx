@@ -12,7 +12,7 @@ import Nosotros from './paginas/Nosotros'
 import Footer from './componentes/organismos/Footer'
 import Contacto from './paginas/Contacto'
 import Carrito from './paginas/Carrito'
-
+import ListadoContactos from './paginas/ListadoContactos'
 function App() {
   return(
     <div className="d-flex flex-column min-vh-100">
@@ -29,6 +29,8 @@ function App() {
           <Route path="/producto/:id" element={<DetalleProducto />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/carrito" element={<Carrito />} />
+          <Route path="/listadoContactos" element={<ListadoContactos/>}/>
+
         </Routes>
       </main>
 

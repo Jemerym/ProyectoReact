@@ -1,37 +1,59 @@
 
 import { useParams } from "react-router-dom";
 import BotonVolver from "../componentes/atomos/BotonVolver";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BotonCarrito from "../componentes/atomos/BotonCarrito";
-import { productos } from "./Productos";
+
+interface Producto {
+    id: number;
+    codigo: string;
+    nombre: string;
+    categoria: string;
+    stock: number;
+    precio: number;
+    descripcion: string;
+    imagen: string;
+}
 
 function DetalleProducto() {
     const { id } = useParams();
+    const [productos, setProductos] = useState<Producto | null>(null);
+    const [stockActual, setStockActual] = useState(0);
 
-    const producto = productos.find(
-        producto => producto.id === Number(id)
-    );
+    useEffect(() => {
+      if (!id) return;
 
-    const [stockActual, setStockActual] = useState(producto ? producto.stock : 0);
+      fetch(`http://localhost:8083/api/productos/${id}`)
+          .then((res) => {
+                if (!res.ok) throw new Error("Error al cargar el producto");
+                return res.json();
+          })
+          .then((data : Producto) => {
+            setProductos(data);
+            const carrito = JSON.parse(localStorage.getItem("carrito") || "[]");
+            const enCarrito = carrito.find((item: any) => item.id === data.id)?.cantidad || 0;
+            setStockActual(data.stock - enCarrito);
+          })
+          .catch((err) => console.error("Error cargando detalle:", err))
+    }, [id]);
 
 const agregar = () => {
-    if (stockActual > 0 && producto) {
+    if (stockActual > 0 && productos) {
         if (window.confirm("¿Estás seguro de añadir este producto?")) {
             const carrito = JSON.parse(localStorage.getItem("carrito") || "[]");
-            const existente = carrito.find((item: any) => item.id === producto.id);
+            const existente = carrito.find((item: any) => item.id === productos.id);
             if (existente) {
                 existente.cantidad += 1;
             } else {
                 carrito.push({
-                    id: producto.id,
-                    nombre: producto.nombre,
-                    precio: producto.precio,
-                    imagen: producto.imagen,
+                    id: productos.id,
+                    nombre: productos.nombre,
+                    precio: productos.precio,
+                    imagen: productos.imagen,
                     cantidad: 1
                 });
             }
             localStorage.setItem("carrito", JSON.stringify(carrito));
-            // Mantenemos el descuento de stock:
             setStockActual(stockActual - 1);
             alert("Producto añadido al carrito");
         }
@@ -42,25 +64,25 @@ const agregar = () => {
 
 return (
   <div className="container mt-5 d-flex justify-content-center">
-    {producto && (
+    {productos && (
       <div className="card shadow-sm p-4" style={{ maxWidth: '500px', width: '100%' }}>
         <h2 className="card-title text-center mb-4">Detalle del Producto</h2>
         <div className="text-center mb-3">
           <img 
-            src={producto.imagen} 
-            alt={producto.nombre} 
+            src={productos.imagen} 
+            alt={productos.nombre} 
             style={{ height: '200px', objectFit: 'contain' }} 
           />
         </div>
         <div className="card-body px-0">
-          <h3 className="fw-bold">{producto.nombre}</h3>
-          <p className="mb-1"><strong>Código:</strong> {producto.codigo}</p>
-          <p className="mb-1"><strong>Categoría:</strong> {producto.categoria}</p>
+          <h3 className="fw-bold">{productos.nombre}</h3>
+          <p className="mb-1"><strong>Código:</strong> {productos.codigo}</p>
+          <p className="mb-1"><strong>Categoría:</strong> {productos.categoria}</p>
           <p className="mb-1"><strong>Stock:</strong> {stockActual}</p>
           <p className="fs-5 fw-bold text-primary my-2">
-            Precio: ${Number(producto.precio).toLocaleString('es-CL')}
+            Precio: ${Number(productos.precio).toLocaleString('es-CL')}
           </p>
-          <p className="text-muted">{producto.descripcion}</p>
+          <p className="text-muted">{productos.descripcion}</p>
           <div className="d-flex gap-2 mt-4">
             <BotonCarrito onClick={agregar} />
             <BotonVolver />

@@ -1,6 +1,5 @@
 import { useState } from "react"
 import CampoFormulario from "../moleculas/CampoFormulario";
-
 import type { SubmitEvent } from "react";
 
 function FormularioContacto(){
@@ -15,10 +14,14 @@ function FormularioContacto(){
     const manejarEnvio = async (e: SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        if(enviando) return;
+        if (enviando) return;
 
         if (nombre.trim() === "") {
             alert("Debe ingresar su nombre")
+            return;
+        }
+        if (nombre.length > 10) {
+            alert("No debe pasar de 10 caracteres")
             return;
         }
         if (correo.trim() === "") {
@@ -51,42 +54,37 @@ function FormularioContacto(){
         setEnviando(true);
 
         try{
-    const respuesta = await fetch(
-      "http://localhost:8082/api/contactos",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          nombreCompleto: nombre.trim(),
-          correo: correo.trim(),
-          telefono: telefono.trim(),
-          direccion: direccion.trim(),
-          mensaje: mensaje.trim(),
-        }),
-      }
-    );
+            const respuesta = await fetch(
+                "http://localhost:8082/api/contactos",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        nombreCompleto: nombre.trim(),
+                        correo: correo.trim(),
+                        mensaje: mensaje.trim(),
+                    }),
+                }
+            );
 
-    if (!respuesta.ok) {
-      throw new Error(`Error HTTP ${respuesta.status}`);
-    }
+            if(!respuesta.ok){
+                throw new Error(`Error HTTP ${respuesta.status}`);
+            }
+            alert("Mensaje guardado correctamente");
 
-    alert("Mensaje guardado correctamente");
-    setNombre("");
-    setCorreo("");
-    setTelefono("");
-    setDireccion("");
-    setMensaje("");
-  } catch (error) {
-    console.error("Error al enviar el contacto:", error);
-    alert("No se pudo enviar el mensaje. Intente nuevamente.");
-  } finally {
-    setEnviando(false);
-  }
-
-
-        
+            setNombre("");
+            setCorreo("");
+            setTelefono("");
+            setDireccion("");
+            setMensaje("");
+        } catch (error) {
+            console.error("Error al enviar el contacto:", error);
+            alert("No se pudo enviar el mensaje. Intente nuevamente.");
+        } finally {
+            setEnviando(false);
+        }
     } 
     
     return(
@@ -128,7 +126,7 @@ function FormularioContacto(){
                 valor={mensaje}
                 alCambiar={setMensaje}
             />
-            <button type="submit" className="btn btn-primary" disabled={enviando}>
+            <button type="submit" className="btn btn-warning w-100 fw-bold" disabled={enviando}>
                 {enviando ? "Enviando..." : "Enviar mensaje"}
             </button>
         </form>
