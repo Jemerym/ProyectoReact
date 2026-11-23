@@ -35,20 +35,17 @@ function Navbar() {
 
       <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul className="navbar-nav links">
-          <li className="nav-item"><Link className="nav-link" to={esAdmin ? "/admin" : "/"}>Inicio</Link></li>
-          {esAdmin && (
-            <>
-              <li className="nav-item"><Link className="nav-link" to="/admin/pedidos">Pedidos</Link></li>
-              <li className="nav-item"><Link className="nav-link" to="/admin/usuarios">Usuarios</Link></li>
-              <li className="nav-item"><Link className="nav-link" to="/listadoContactos">Mensajeria</Link></li>
-            </>
-          )}
+          <li className="nav-item"><Link className="nav-link" to="/">Inicio</Link></li>
           <li className="nav-item"><Link className="nav-link" to="/productos">Catalogo</Link></li>
           <li className="nav-item"><Link className="nav-link" to="/nosotros">Nosotros</Link></li>
           <li className="nav-item"><Link className="nav-link" to="/contacto">Contacto</Link></li>
           <li className="nav-item"><Link className="nav-link" to="/carrito">Carrito</Link></li>
           {usuario && !esAdmin && (
             <li className="nav-item"><Link className="nav-link" to="/mis-pedidos">Mis pedidos</Link></li>
+          )}
+          {/* El admin gestiona todo desde el panel (que tiene su propia barra) */}
+          {esAdmin && (
+            <li className="nav-item"><Link className="nav-link fw-bold text-warning" to="/admin">Panel admin</Link></li>
           )}
           <li className="nav-item">
             {usuario ? (

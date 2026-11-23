@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import './App.css'
 import Navbar from './componentes/organismos/Navbar'
 import Inicio from './paginas/Inicio'
@@ -15,12 +15,18 @@ import ListadoContactos from './paginas/ListadoContactos'
 import MisPedidos from './paginas/MisPedidos'
 import AdminPedidos from './paginas/AdminPedidos'
 import AdminUsuarios from './paginas/AdminUsuarios'
+import AdminProductos from './paginas/AdminProductos'
 import RutaProtegida from './componentes/organismos/RutaProtegida'
+import LayoutAdmin from './componentes/organismos/LayoutAdmin'
 
 function App() {
+  // En el panel (/admin...) no se muestra el Navbar ni el Footer de la tienda: LayoutAdmin tiene su propia barra.
+  const { pathname } = useLocation();
+  const enPanelAdmin = pathname === "/admin" || pathname.startsWith("/admin/");
+
   return(
     <div className="d-flex flex-column min-vh-100">
-      <Navbar />
+      {!enPanelAdmin && <Navbar />}
 
       <main className="flex-grow-1">
         <Routes>
@@ -37,15 +43,18 @@ function App() {
           {/* Requieren haber iniciado sesión */}
           <Route path="/mis-pedidos" element={<RutaProtegida><MisPedidos /></RutaProtegida>} />
 
-          {/* Solo administrador */}
-          <Route path="/admin" element={<RutaProtegida soloAdmin><Admin /></RutaProtegida>} />
-          <Route path="/admin/pedidos" element={<RutaProtegida soloAdmin><AdminPedidos /></RutaProtegida>} />
-          <Route path="/admin/usuarios" element={<RutaProtegida soloAdmin><AdminUsuarios /></RutaProtegida>} />
-          <Route path="/listadoContactos" element={<RutaProtegida soloAdmin><ListadoContactos /></RutaProtegida>} />
+          {/* Panel de administración: solo ADMIN. Todas usan LayoutAdmin (barra + pestañas). */}
+          <Route path="/admin" element={<RutaProtegida soloAdmin><LayoutAdmin /></RutaProtegida>}>
+            <Route index element={<Admin />} />
+            <Route path="productos" element={<AdminProductos />} />
+            <Route path="pedidos" element={<AdminPedidos />} />
+            <Route path="mensajes" element={<ListadoContactos />} />
+            <Route path="usuarios" element={<AdminUsuarios />} />
+          </Route>
         </Routes>
       </main>
 
-      <Footer />
+      {!enPanelAdmin && <Footer />}
     </div>
   )
 }

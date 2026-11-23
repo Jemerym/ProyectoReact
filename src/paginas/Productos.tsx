@@ -22,7 +22,6 @@ function Productos() {
   // Cantidades que el usuario ya tiene en su carrito (guardado en la BD): { productoId: cantidad }
   const [enCarrito, setEnCarrito] = useState<Record<number, number>>({});
   const usuario = obtenerUsuario();
-  const admin = usuario?.rol === "ADMIN";
   const usuarioId = usuario?.id;
 
   const cargarProductos = () => {
@@ -48,40 +47,6 @@ function Productos() {
 
   const categorias = [...new Set(productos.map((p) => p.categoria))];
 
-  const eliminar = async (id: number) => {
-    try {
-      const res = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
-      if (!res.ok) throw new Error("Error al eliminar");
-      cargarProductos();
-    } catch {
-      alert("No se pudo eliminar el producto");
-    }
-  };
-
-  const modificar = async (id: number) => {
-    const p = productos.find((prod) => prod.id === id);
-    if (!p) return;
-
-    const actualizado: Producto = {
-      ...p,
-      nombre: prompt("Nombre:", p.nombre) || p.nombre,
-      precio: Number(prompt("Precio:", String(p.precio))) || p.precio,
-      stock: Number(prompt("Stock:", String(p.stock))) || p.stock,
-    };
-
-    try {
-      const res = await fetch(`${API_URL}/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(actualizado),
-      });
-      if (!res.ok) throw new Error("Error al modificar");
-      cargarProductos();
-    } catch {
-      alert("No se pudo modificar el producto");
-    }
-  };
-
   return (
     <div className="container mt-5">
       <h1 className="text-center fw-bold">Productos</h1>
@@ -100,8 +65,6 @@ function Productos() {
                     <CardProductos
                       {...p}
                       stock={stockDisponible}
-                      onModificar={admin ? () => modificar(p.id) : undefined}
-                      onEliminar={admin ? () => eliminar(p.id) : undefined}
                     />
                   </div>
                 );

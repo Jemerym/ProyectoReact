@@ -1,6 +1,5 @@
 import { API } from "../api/config";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import CardProductos from '../componentes/moleculas/CardProductos';
 
 interface Producto {
@@ -15,18 +14,7 @@ interface Producto {
 }
 
 function Inicio() {
-    const navegacion = useNavigate();
     const [productos, setProductos] = useState<Producto[]>([]);
-
-    useEffect(() => {
-        const sesion = localStorage.getItem("usuarioActivo");
-        if (sesion) {
-            const usuario = JSON.parse(sesion);
-            if (usuario?.rol === "ADMIN") {
-                navegacion("/admin", { replace: true });
-            }
-        }
-    }, [navegacion]);
 
     useEffect(() => {
         fetch(`${API}/productos`)
