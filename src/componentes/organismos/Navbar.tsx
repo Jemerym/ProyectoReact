@@ -1,25 +1,17 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { obtenerUsuario, cerrarSesion as borrarSesion } from '../../api/sesion';
 
 function Navbar() {
-  const location = useLocation();
+  // useLocation hace que el Navbar se vuelva a dibujar al cambiar de página,
+  // así lee la sesión actualizada después de iniciar o cerrar sesión.
+  useLocation();
   const navegacion = useNavigate();
 
-  const [usuario, setUsuario] = useState<{ correo: string; rol: string } | null>(() => {
-    const sesion = localStorage.getItem("usuarioActivo");
-    return sesion ? JSON.parse(sesion) : null;
-  });
-
-  useEffect(() => {
-    const sesion = localStorage.getItem("usuarioActivo");
-    setUsuario(sesion ? JSON.parse(sesion) : null);
-  }, [location]);
-
-  const esAdmin = usuario?.rol === "admin";
+  const usuario = obtenerUsuario();
+  const esAdmin = usuario?.rol === "ADMIN";
 
   const cerrarSesion = () => {
-    localStorage.removeItem("usuarioActivo");
-    setUsuario(null);
+    borrarSesion();
     navegacion("/");
   };
 
@@ -44,15 +36,22 @@ function Navbar() {
       <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul className="navbar-nav links">
           <li className="nav-item"><Link className="nav-link" to={esAdmin ? "/admin" : "/"}>Inicio</Link></li>
-          {esAdmin && (<li className="nav-item"><Link className="nav-link" to="/admin">Panel Admin</Link></li>)}
+          {esAdmin && (
+            <>
+              <li className="nav-item"><Link className="nav-link" to="/admin/pedidos">Pedidos</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/admin/usuarios">Usuarios</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/listadoContactos">Mensajeria</Link></li>
+            </>
+          )}
           <li className="nav-item"><Link className="nav-link" to="/productos">Catalogo</Link></li>
           <li className="nav-item"><Link className="nav-link" to="/nosotros">Nosotros</Link></li>
           <li className="nav-item"><Link className="nav-link" to="/contacto">Contacto</Link></li>
-          <li className="nav-item"><Link className="nav-link" to="/listadoContactos">Mensajeria</Link></li>
-          
           <li className="nav-item"><Link className="nav-link" to="/carrito">Carrito</Link></li>
+          {usuario && !esAdmin && (
+            <li className="nav-item"><Link className="nav-link" to="/mis-pedidos">Mis pedidos</Link></li>
+          )}
           <li className="nav-item">
-            {usuario ?  (
+            {usuario ? (
               <a
                 href="#logout"
                 className="nav-link"
@@ -61,11 +60,12 @@ function Navbar() {
                   cerrarSesion();
                 }}
               >
-                Cerrar Sesion
+                Cerrar Sesion ({usuario.nombre})
               </a>
             ) : (
-              <Link className="nav-link" to="/Login">Iniciar Sesion</Link>)}
-            </li>
+              <Link className="nav-link" to="/login">Iniciar Sesion</Link>
+            )}
+          </li>
         </ul>
       </div>
     </nav>

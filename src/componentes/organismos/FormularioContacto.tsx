@@ -1,6 +1,7 @@
 import { useState } from "react"
 import CampoFormulario from "../moleculas/CampoFormulario";
 import type { SubmitEvent } from "react";
+import { API_CONTACTOS } from "../../api/config";
 
 function FormularioContacto(){
     const [nombre, setNombre] = useState("");
@@ -55,7 +56,7 @@ function FormularioContacto(){
 
         try{
             const respuesta = await fetch(
-                "http://localhost:8082/api/contactos",
+                `${API_CONTACTOS}/contactos`,
                 {
                     method: "POST",
                     headers: {

@@ -1,3 +1,4 @@
+import { API } from "../api/config";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CardProductos from '../componentes/moleculas/CardProductos';
@@ -21,14 +22,14 @@ function Inicio() {
         const sesion = localStorage.getItem("usuarioActivo");
         if (sesion) {
             const usuario = JSON.parse(sesion);
-            if (usuario?.rol === "admin") {
+            if (usuario?.rol === "ADMIN") {
                 navegacion("/admin", { replace: true });
             }
         }
     }, [navegacion]);
 
     useEffect(() => {
-        fetch("http://localhost:8083/api/productos")
+        fetch(`${API}/productos`)
             .then((res) => {
                 if (!res.ok) throw new Error("Error al cargar productos");
                 return res.json();

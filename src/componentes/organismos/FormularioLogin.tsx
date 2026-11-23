@@ -1,16 +1,19 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // 1. Importamos useNavigate
-
+import { useNavigate } from "react-router-dom";
 import CampoFormulario from "../moleculas/CampoFormulario";
+import { API } from "../../api/config";
+import { guardarUsuario, type UsuarioSesion } from "../../api/sesion";
 
 function FormularioLogin() {
   const [correo, setCorreo] = useState("");
   const [contraseña, setContraseña] = useState("");
-  const navegacion = useNavigate();   
+  const [enviando, setEnviando] = useState(false);
+  const navegacion = useNavigate();
 
-  // Valida los datos al enviar el formulario
-    const manejarEnvio = (e: React.SubmitEvent<HTMLFormElement>) => {
+  const manejarEnvio = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault(); // evita recargar la pagina
+
+    if (enviando) return;
 
     if (correo.trim() === "") {
       alert("Debe ingresar su correo");
@@ -23,45 +26,44 @@ function FormularioLogin() {
       return;
     }
 
-    // Validamos la contraseña
     if (contraseña.trim() === "") {
       alert("Debe ingresar su contraseña");
       return;
     }
-    // Si como ingresa como admim
-    if (correo === "admin@demo.com" && contraseña === "1234") {
-      alert("¡Acceso de administrador!");
-      localStorage.setItem("usuarioActivo", JSON.stringify({ correo, rol: "admin" }));
-      navegacion("/admin");
-      return;
-    }
 
-    //el usuario almacenado del localstorage se guarda en una constante para validar si existe
-    const usuarioGuardado = localStorage.getItem("usuarioRegistrado");
-    //validacion de si existe o no un usuario 
-    if (!usuarioGuardado) {
-      alert("No hay ningún usuario registrado");
-      return;
-    }
-    //almacenan los datos del usuario guardado para validar si los datos ingresados son correctos
-    const { correo: correoGuardado, contraseña: passwordGuardado } = JSON.parse(usuarioGuardado);
+    setEnviando(true);
+    try {
+      // El microservicio de usuarios compara la contraseña con el hash guardado (BCrypt).
+      const respuesta = await fetch(`${API}/usuarios/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ correo: correo.trim(), password: contraseña }),
+      });
 
-    if (correo === correoGuardado && contraseña === passwordGuardado) {
-      const esAdmin = correo.toLowerCase().includes("admin");
-      const rol = esAdmin ? "admin" : "usuario";
+      if (respuesta.status === 401) {
+        alert("Correo o contraseña incorrectos");
+        return;
+      }
+      if (!respuesta.ok) {
+        throw new Error(`Error HTTP ${respuesta.status}`);
+      }
 
-      localStorage.setItem("usuarioActivo", JSON.stringify({ correo, rol }));
+      // Respuesta: { id, nombre, correo, rol } (sin contraseña)
+      const usuario: UsuarioSesion = await respuesta.json();
+      guardarUsuario(usuario);
 
-      if (esAdmin) {
+      if (usuario.rol === "ADMIN") {
         alert("¡Acceso de administrador!");
         navegacion("/admin");
       } else {
         alert("¡Inicio de sesión exitoso!");
         navegacion("/");
       }
-    } 
-    else {
-      alert("Correo o contraseña incorrectos");
+    } catch (error) {
+      console.error("Error al iniciar sesión:", error);
+      alert("No se pudo conectar con el servidor. Intente nuevamente.");
+    } finally {
+      setEnviando(false);
     }
   };
 
@@ -83,8 +85,8 @@ function FormularioLogin() {
         alCambiar={setContraseña}
       />
 
-      <button type="submit" className="btn btn-warning w-100 fw-bold mt-3">
-        Iniciar Sesión
+      <button type="submit" className="btn btn-warning w-100 fw-bold mt-3" disabled={enviando}>
+        {enviando ? "Ingresando..." : "Iniciar Sesión"}
       </button>
     </form>
   );

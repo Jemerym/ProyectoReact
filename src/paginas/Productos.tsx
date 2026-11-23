@@ -1,5 +1,8 @@
+import { API } from "../api/config";
 import { useEffect, useState } from "react";
 import CardProductos from "../componentes/moleculas/CardProductos";
+import { obtenerUsuario } from "../api/sesion";
+import { cantidadesPorProducto, obtenerCarrito } from "../api/carrito";
 
 interface Producto {
   id: number;
@@ -12,12 +15,15 @@ interface Producto {
   imagen: string;
 }
 
-const API_URL = "http://localhost:8083/api/productos";
+const API_URL = `${API}/productos`;
 
 function Productos() {
   const [productos, setProductos] = useState<Producto[]>([]);
-  const carrito = JSON.parse(localStorage.getItem("carrito") || "[]");
-  const admin = JSON.parse(localStorage.getItem("usuarioActivo") || "{}").rol === "admin";
+  // Cantidades que el usuario ya tiene en su carrito (guardado en la BD): { productoId: cantidad }
+  const [enCarrito, setEnCarrito] = useState<Record<number, number>>({});
+  const usuario = obtenerUsuario();
+  const admin = usuario?.rol === "ADMIN";
+  const usuarioId = usuario?.id;
 
   const cargarProductos = () => {
     fetch(API_URL)
@@ -32,6 +38,13 @@ function Productos() {
   useEffect(() => {
     cargarProductos();
   }, []);
+
+  useEffect(() => {
+    if (!usuarioId) return;
+    obtenerCarrito(usuarioId)
+      .then((carrito) => setEnCarrito(cantidadesPorProducto(carrito)))
+      .catch((err) => console.error("Error cargando carrito:", err));
+  }, [usuarioId]);
 
   const categorias = [...new Set(productos.map((p) => p.categoria))];
 
@@ -81,8 +94,7 @@ function Productos() {
             {productos
               .filter((p) => p.categoria === categoria)
               .map((p) => {
-                const enCarrito = carrito.find((item: any) => item.id === p.id)?.cantidad || 0;
-                const stockDisponible = p.stock - enCarrito;
+                const stockDisponible = p.stock - (enCarrito[p.id] || 0);
                 return (
                   <div className="col" key={p.id}>
                     <CardProductos

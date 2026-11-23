@@ -1,8 +1,10 @@
-
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import BotonVolver from "../componentes/atomos/BotonVolver";
 import { useEffect, useState } from "react";
 import BotonCarrito from "../componentes/atomos/BotonCarrito";
+import { API } from "../api/config";
+import { obtenerUsuario } from "../api/sesion";
+import { agregarAlCarrito, cantidadesPorProducto, obtenerCarrito } from "../api/carrito";
 
 interface Producto {
     id: number;
@@ -17,48 +19,52 @@ interface Producto {
 
 function DetalleProducto() {
     const { id } = useParams();
+    const navegacion = useNavigate();
     const [productos, setProductos] = useState<Producto | null>(null);
     const [stockActual, setStockActual] = useState(0);
 
     useEffect(() => {
       if (!id) return;
 
-      fetch(`http://localhost:8083/api/productos/${id}`)
+      fetch(`${API}/productos/${id}`)
           .then((res) => {
                 if (!res.ok) throw new Error("Error al cargar el producto");
                 return res.json();
           })
-          .then((data : Producto) => {
+          .then(async (data: Producto) => {
             setProductos(data);
-            const carrito = JSON.parse(localStorage.getItem("carrito") || "[]");
-            const enCarrito = carrito.find((item: any) => item.id === data.id)?.cantidad || 0;
+            // Stock disponible = stock del producto - lo que el usuario ya tiene en su carrito (guardado en la BD).
+            const usuario = obtenerUsuario();
+            const carrito = usuario ? await obtenerCarrito(usuario.id).catch(() => null) : null;
+            const enCarrito = cantidadesPorProducto(carrito)[data.id] || 0;
             setStockActual(data.stock - enCarrito);
           })
           .catch((err) => console.error("Error cargando detalle:", err))
     }, [id]);
 
-const agregar = () => {
-    if (stockActual > 0 && productos) {
-        if (window.confirm("¿Estás seguro de añadir este producto?")) {
-            const carrito = JSON.parse(localStorage.getItem("carrito") || "[]");
-            const existente = carrito.find((item: any) => item.id === productos.id);
-            if (existente) {
-                existente.cantidad += 1;
-            } else {
-                carrito.push({
-                    id: productos.id,
-                    nombre: productos.nombre,
-                    precio: productos.precio,
-                    imagen: productos.imagen,
-                    cantidad: 1
-                });
-            }
-            localStorage.setItem("carrito", JSON.stringify(carrito));
-            setStockActual(stockActual - 1);
-            alert("Producto añadido al carrito");
-        }
-    } else {
+const agregar = async () => {
+    if (!productos) return;
+
+    const usuario = obtenerUsuario();
+    if (!usuario) {
+        alert("Debe iniciar sesión para agregar productos al carrito");
+        navegacion("/login");
+        return;
+    }
+    if (stockActual <= 0) {
         alert("Producto sin stock");
+        return;
+    }
+    if (!window.confirm("¿Estás seguro de añadir este producto?")) return;
+
+    try {
+        // Se guarda en el microservicio de carrito; él valida el stock con el microservicio de productos.
+        const carrito = await agregarAlCarrito(usuario.id, productos.id, 1);
+        const enCarrito = cantidadesPorProducto(carrito)[productos.id] || 0;
+        setStockActual(productos.stock - enCarrito);
+        alert("Producto añadido al carrito");
+    } catch (error) {
+        alert(error instanceof Error ? error.message : "No se pudo agregar al carrito");
     }
 };
 

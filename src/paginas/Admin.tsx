@@ -1,3 +1,4 @@
+import { API } from "../api/config";
 import { useEffect, useState } from 'react';
 import CardProductos from '../componentes/moleculas/CardProductos';
 
@@ -12,11 +13,11 @@ interface Producto {
     imagen: string;
 }
 
-function admin(){
+function Admin(){
     const [productos,setProductos] = useState<Producto[]>([]);
 
     useEffect(() => {
-        fetch("http://localhost:8083/api/productos")
+        fetch(`${API}/productos`)
             .then((res) => {
                 if (!res.ok) throw new Error("Error al cargar productos");
                 return res.json();
@@ -62,4 +63,4 @@ function admin(){
     );
 }
 
-export default admin;
+export default Admin;

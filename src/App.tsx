@@ -1,4 +1,3 @@
-
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import Navbar from './componentes/organismos/Navbar'
@@ -13,13 +12,19 @@ import Footer from './componentes/organismos/Footer'
 import Contacto from './paginas/Contacto'
 import Carrito from './paginas/Carrito'
 import ListadoContactos from './paginas/ListadoContactos'
+import MisPedidos from './paginas/MisPedidos'
+import AdminPedidos from './paginas/AdminPedidos'
+import AdminUsuarios from './paginas/AdminUsuarios'
+import RutaProtegida from './componentes/organismos/RutaProtegida'
+
 function App() {
   return(
     <div className="d-flex flex-column min-vh-100">
       <Navbar />
-      
+
       <main className="flex-grow-1">
         <Routes>
+          {/* Públicas */}
           <Route path="/" element={<Inicio />} />
           <Route path="/login" element={<Login />} />
           <Route path="/registro" element={<Registro />} />
@@ -27,10 +32,16 @@ function App() {
           <Route path="/nosotros" element={<Nosotros />} />
           <Route path="/contacto" element={<Contacto />} />
           <Route path="/producto/:id" element={<DetalleProducto />} />
-          <Route path="/admin" element={<Admin />} />
           <Route path="/carrito" element={<Carrito />} />
-          <Route path="/listadoContactos" element={<ListadoContactos/>}/>
 
+          {/* Requieren haber iniciado sesión */}
+          <Route path="/mis-pedidos" element={<RutaProtegida><MisPedidos /></RutaProtegida>} />
+
+          {/* Solo administrador */}
+          <Route path="/admin" element={<RutaProtegida soloAdmin><Admin /></RutaProtegida>} />
+          <Route path="/admin/pedidos" element={<RutaProtegida soloAdmin><AdminPedidos /></RutaProtegida>} />
+          <Route path="/admin/usuarios" element={<RutaProtegida soloAdmin><AdminUsuarios /></RutaProtegida>} />
+          <Route path="/listadoContactos" element={<RutaProtegida soloAdmin><ListadoContactos /></RutaProtegida>} />
         </Routes>
       </main>
 
