@@ -23,6 +23,8 @@ function DetalleProducto() {
     const [productos, setProductos] = useState<Producto | null>(null);
     const [stockActual, setStockActual] = useState(0);
 
+    
+
     useEffect(() => {
       if (!id) return;
 
@@ -32,12 +34,11 @@ function DetalleProducto() {
                 return res.json();
           })
           .then(async (data: Producto) => {
-            setProductos(data);
-            // Stock disponible = stock del producto - lo que el usuario ya tiene en su carrito (guardado en la BD).
-            const usuario = obtenerUsuario();
-            const carrito = usuario ? await obtenerCarrito(usuario.id).catch(() => null) : null;
-            const enCarrito = cantidadesPorProducto(carrito)[data.id] || 0;
-            setStockActual(data.stock - enCarrito);
+              setProductos(data);
+              const usuario = obtenerUsuario();
+              const carrito = usuario ? await obtenerCarrito(usuario.id).catch(() => null) : null;
+              const enCarrito = cantidadesPorProducto(carrito)[data.id] || 0;
+              setStockActual(data.stock - enCarrito);
           })
           .catch((err) => console.error("Error cargando detalle:", err))
     }, [id]);
@@ -58,10 +59,12 @@ const agregar = async () => {
     if (!window.confirm("¿Estás seguro de añadir este producto?")) return;
 
     try {
-        // Se guarda en el microservicio de carrito; él valida el stock con el microservicio de productos.
         const carrito = await agregarAlCarrito(usuario.id, productos.id, 1);
-        const enCarrito = cantidadesPorProducto(carrito)[productos.id] || 0;
-        setStockActual(productos.stock - enCarrito);
+        const cantidades = cantidadesPorProducto(carrito);
+        setStockActual(productos.stock - (cantidades[productos.id] || 0));
+
+        const total = Object.values(cantidades).reduce((sum, n) => sum + Number(n), 0);
+        window.dispatchEvent(new CustomEvent("carritoActualizado", { detail: total }));
         alert("Producto añadido al carrito");
     } catch (error) {
         alert(error instanceof Error ? error.message : "No se pudo agregar al carrito");

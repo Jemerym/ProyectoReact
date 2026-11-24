@@ -52,6 +52,7 @@ function Carrito() {
   const actualizar = async (accion: () => Promise<CarritoDatos>) => {
     try {
       setCarrito(await accion());
+      window.dispatchEvent(new Event("carritoActualizado"));
     } catch (error) {
       alert(error instanceof Error ? error.message : "No se pudo actualizar el carrito");
     }
@@ -66,6 +67,7 @@ function Carrito() {
     try {
       await vaciarCarrito(usuarioId);
       setCarrito({ usuarioId, items: [], total: 0 });
+      window.dispatchEvent(new Event("carritoActualizado"));
     } catch (error) {
       alert(error instanceof Error ? error.message : "No se pudo vaciar el carrito");
     }
@@ -119,6 +121,7 @@ function Carrito() {
       // El pedido ya quedó guardado; si vaciar falla solo se avisa en consola.
       await vaciarCarrito(usuarioId).catch((e) => console.error("No se pudo vaciar el carrito:", e));
       setCarrito({ usuarioId, items: [], total: 0 });
+      window.dispatchEvent(new Event("carritoActualizado"));
 
       alert(`La compra fue realizada con exito. Pedido N° ${pedido.id}`);
       navegacion("/mis-pedidos");
