@@ -47,16 +47,20 @@ function AdminPedidos() {
         <TablaPedido key={pedido.id} pedido={pedido}>
           <div className="d-flex align-items-center gap-2">
             <span className="text-muted small">Usuario #{pedido.usuarioId}</span>
-            <select
-              className="form-select form-select-sm w-auto"
-              aria-label={`Estado del pedido ${pedido.id}`}
-              value={pedido.estado}
-              onChange={(e) => cambiarEstado(pedido.id, e.target.value)}
-            >
-              {ESTADOS.map((estado) => (
-                <option key={estado} value={estado}>{estado}</option>
-              ))}
-            </select>
+            {pedido.estado === "CANCELADO" ? (
+              <span className="text-danger small fw-bold">Cancelado por el cliente</span>
+            ) : (
+              <select
+                className="form-select form-select-sm w-auto"
+                aria-label={`Estado del pedido ${pedido.id}`}
+                value={pedido.estado}
+                onChange={(e) => cambiarEstado(pedido.id, e.target.value)}
+              >
+                {ESTADOS.map((estado) => (
+                  <option key={estado} value={estado}>{estado}</option>
+                ))}
+              </select>
+            )}
           </div>
         </TablaPedido>
       ))}

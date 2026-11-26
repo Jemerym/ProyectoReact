@@ -6,8 +6,6 @@ import { API_CONTACTOS } from "../../api/config";
 function FormularioContacto(){
     const [nombre, setNombre] = useState("");
     const [correo, setCorreo] = useState("");
-    const [telefono, setTelefono] = useState("");
-    const [direccion, setDireccion] = useState("");
     const [mensaje, setMensaje] = useState("");
     const [enviando, setEnviando] = useState(false);
 
@@ -21,8 +19,9 @@ function FormularioContacto(){
             alert("Debe ingresar su nombre")
             return;
         }
-        if (nombre.length > 10) {
-            alert("No debe pasar de 10 caracteres")
+        // El microservicio de mensajeria acepta hasta 150 caracteres
+        if (nombre.length > 150) {
+            alert("No debe pasar de 150 caracteres")
             return;
         }
         if (correo.trim() === "") {
@@ -33,22 +32,8 @@ function FormularioContacto(){
             alert("Debe ingresar un correo valido");
             return;
         }
-        if (telefono.trim() === "") {
-            alert("Debe ingresar su telefono de contacto")
-            return;
-        }
-
-        if (!/^\+?[0-9]{8,15}$/.test(telefono.trim())) {
-            alert("Debe ingresar un numero de telefono valido");
-            return;
-        }
-
-        if (direccion.trim()=== "") {
-            alert("Debe ingresar su direccion de entrega")
-            return;
-        }
         if (mensaje.trim() === "") {
-            alert("Debe ingresar un mensaje o detalle del pedido")
+            alert("Debe ingresar su consulta")
             return;
         }
 
@@ -77,8 +62,6 @@ function FormularioContacto(){
 
             setNombre("");
             setCorreo("");
-            setTelefono("");
-            setDireccion("");
             setMensaje("");
         } catch (error) {
             console.error("Error al enviar el contacto:", error);
@@ -106,22 +89,8 @@ function FormularioContacto(){
                 valor={correo}
                 alCambiar={setCorreo}
             />
-             <CampoFormulario
-                etiqueta="Telefono"
-                tipo="tel"
-                nombre="telefono"
-                valor={telefono}
-                alCambiar={setTelefono}
-            />
-             <CampoFormulario
-                etiqueta="Direccion"
-                tipo="text"
-                nombre="direccion"
-                valor={direccion}
-                alCambiar={setDireccion}
-            />
             <CampoFormulario
-                etiqueta="Mensaje"
+                etiqueta="Consulta"
                 tipo="text"
                 nombre="mensaje"
                 valor={mensaje}

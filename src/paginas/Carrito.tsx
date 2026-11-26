@@ -52,7 +52,6 @@ function Carrito() {
   const actualizar = async (accion: () => Promise<CarritoDatos>) => {
     try {
       setCarrito(await accion());
-      window.dispatchEvent(new Event("carritoActualizado"));
     } catch (error) {
       alert(error instanceof Error ? error.message : "No se pudo actualizar el carrito");
     }
@@ -67,17 +66,14 @@ function Carrito() {
     try {
       await vaciarCarrito(usuarioId);
       setCarrito({ usuarioId, items: [], total: 0 });
-      window.dispatchEvent(new Event("carritoActualizado"));
     } catch (error) {
       alert(error instanceof Error ? error.message : "No se pudo vaciar el carrito");
     }
   };
 
-  // Paga el carrito:
-  // 1) descuenta el stock de cada producto en el microservicio de productos
-  // 2) registra el pedido en el microservicio de pedidos
-  // 3) vacía el carrito en el microservicio de carrito
-  // Si falla el paso 1 o 2, devuelve el stock que ya se había descontado.
+  // Paga el carrito. React solo manda qué productos y cuántos:
+  // el microservicio de pedidos pide los precios reales a productos, descuenta el stock
+  // (y lo devuelve si algo falla) y guarda el pedido. Después se vacía el carrito.
   const pagar = async () => {
     if (pagando) return;
 
@@ -87,16 +83,7 @@ function Carrito() {
     }
 
     setPagando(true);
-    const descontados: ItemCarrito[] = [];
     try {
-      for (const p of items) {
-        const res = await fetch(`${API}/productos/${p.productoId}/descontar?cantidad=${p.cantidad}`, { method: "PUT" });
-        if (!res.ok) {
-          throw new Error(await leerError(res, `No hay stock suficiente de ${p.nombre}`));
-        }
-        descontados.push(p);
-      }
-
       const res = await fetch(`${API}/pedidos`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -104,34 +91,22 @@ function Carrito() {
           usuarioId,
           direccionEntrega: direccion.trim(),
           metodoPago,
-          items: items.map((p) => ({
-            productoId: p.productoId,
-            nombre: p.nombre,
-            precioUnitario: p.precio,
-            cantidad: p.cantidad,
-          })),
+          items: items.map((p) => ({ productoId: p.productoId, cantidad: p.cantidad })),
         }),
       });
       if (!res.ok) {
+        // Ej: "Stock insuficiente para Cilindro GLP 11 kg"
         throw new Error(await leerError(res, "No se pudo registrar el pedido"));
       }
       const pedido = await res.json();
-      descontados.length = 0; // el pedido ya existe: el stock queda descontado
 
       // El pedido ya quedó guardado; si vaciar falla solo se avisa en consola.
       await vaciarCarrito(usuarioId).catch((e) => console.error("No se pudo vaciar el carrito:", e));
       setCarrito({ usuarioId, items: [], total: 0 });
-      window.dispatchEvent(new Event("carritoActualizado"));
 
       alert(`La compra fue realizada con exito. Pedido N° ${pedido.id}`);
       navegacion("/mis-pedidos");
     } catch (error) {
-      // Devuelve el stock de lo que alcanzó a descontarse.
-      await Promise.all(
-        descontados.map((p) =>
-          fetch(`${API}/productos/${p.productoId}/reponer?cantidad=${p.cantidad}`, { method: "PUT" }).catch(() => undefined)
-        )
-      );
       console.error("Error al pagar:", error);
       alert(error instanceof Error && error.message !== "Failed to fetch"
         ? error.message

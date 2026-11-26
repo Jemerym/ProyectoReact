@@ -13,7 +13,7 @@ export interface Pedido {
   total: number;
   metodoPago: string;
   direccionEntrega: string;
-  estado: "PAGADO" | "ENVIADO" | "ENTREGADO";
+  estado: "PAGADO" | "ENVIADO" | "ENTREGADO" | "CANCELADO";
   fechaCreacion: string;
   items: ItemPedido[];
 }
@@ -22,6 +22,7 @@ const COLOR_ESTADO: Record<string, string> = {
   PAGADO: "bg-secondary",
   ENVIADO: "bg-warning text-dark",
   ENTREGADO: "bg-success",
+  CANCELADO: "bg-danger",
 };
 
 type Props = {
